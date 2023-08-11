@@ -18,7 +18,7 @@ export default function Home() {
     <ProductCarouselServer/>
     <Unique/>
     <NewsLetter/>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   )
 }

@@ -8,15 +8,15 @@ const Footer = () => {
   return (
    
    
-    <div className="grid  grid-cols-4 ">
+    <div className=" flex flex-col justify-center lg:flex-row lg:justify-between space-y-10 pb-20 ">
       {/* {1St Column} */}
-      <div className="flex flex-col  ">
+      <div className="flex  flex-col max-w-[32rem]">
         <Image src={logo} alt="logo" />
         <p className='pt-10 pb-10'>
           Small, artisan label that offers a thoughtfully curated collection of
           high quality everyday essentials made.
         </p>
-        <div className=" flex gap-4" >
+        <div className=" flex  gap-4" >
             <div className="w-10 h-10 justify-center bg-gray-100 border-0 rounded-lg shadow-md">
             <Twitter className="m-2" size={25}/>
             </div>
@@ -29,8 +29,8 @@ const Footer = () => {
             </div>
       </div>
       {/* 2nd Column  */}
-      <div className="flex flex-col">
-        <h2 className="text-3xl mb-6">Company</h2>
+      <div className="flex flex-col max-w-[16rem]">
+        <h2 className="text-3xl ">Company</h2>
         <a href="">About</a>
         <a href="">Term of Use</a>
         <a href="">Privacy Policy</a>
@@ -38,14 +38,14 @@ const Footer = () => {
         <a href="">Contact Us</a>
       </div>
       {/* third Column  */}
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-[16rem]">
         <h2 className="text-3xl mb-6">Support</h2>
         <a href="" >Support Carrer</a>
         <a href="" >24h service</a>
         <a href="" >Quick Chat</a>
       </div>
       {/* forth Column  */}
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-[16rem]">
         <h2 className="text-3xl mb-6">Contact</h2>
         <a href="" >WhatsApp</a>
         <a href="" >24h service</a>

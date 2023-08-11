@@ -16,10 +16,9 @@ export default function Home() {
     <Hero/>
     <ProductType/>
     <ProductCarouselServer/>
-    {/* <ProductCarousel ProductData={response}/> */}
-    {/* <Unique/>
+    <Unique/>
     <NewsLetter/>
-    <Footer/> */}
+    {/* <Footer/> */}
     </>
   )
 }

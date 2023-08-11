@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="space-y-5 max-w-[35rem] mt-5">
         <button
           aria-label="redirect to sale page"
-          className="px-6 py-2 rounded-md bg-primaryWhite text-purple-900 font-medium"
+          className="px-6 py-2 bg-[#E1EDFF] rounded-md bg-primaryWhite text-purple-900 font-medium"
         >
           Sale 70%
         </button>

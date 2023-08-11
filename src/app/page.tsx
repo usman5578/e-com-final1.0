@@ -20,8 +20,8 @@ export default async function Home() {
   let {response} = await fetchAllProductsData();
   return (
     <>
-    {/* <Hero/>
-    <ProductType/>
+    <Hero/>
+    {/* <ProductType/>
     <ProductCarousel ProductData={response}/>
     <Unique/>
     <NewsLetter/>

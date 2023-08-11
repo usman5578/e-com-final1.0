@@ -10,14 +10,15 @@ import Link from "next/link";
 import CartState from "./SubComponent/CartState";
 import { BsCart2 } from "react-icons/bs";
 
+
+
 const Navbar = () => {
   const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
-
   return (
     // Main Div
     <div>
       <div className="py-6 flex  justify-between items-center space-x-12 relative">
-        {/* LOgo  */}
+        {/* Logo  */}
         <Link href="/" className="w-36 flex-shrink-0">
           <Image width={500} height={500} src="/logo.webp" alt="Logo" />
         </Link>
@@ -78,7 +79,7 @@ const MobileNavbar = () => {
 
       {NavbarArray.map((items: NavbarItemType, index: number) => {
         return (
-          <div className="z-10">
+          <div className="z-10" key={index}>
             <Link className="hover:bg-gray-100" href={items.href}>
               {items.label}
             </Link>

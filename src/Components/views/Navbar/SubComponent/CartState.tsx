@@ -3,11 +3,7 @@ import { BsCart2 } from "react-icons/bs";
 
 
 const CartState = () => {
-    let items = localStorage.getItem('cart');
-    let items0fCart:any
-    if(items){
-        items0fCart = JSON.parse(items)
-    }
+  
     
   return (
     <div className="flex-shrink-0 w-11 h-11 bg-gray-200 rounded-full flex items-center justify-center relative">

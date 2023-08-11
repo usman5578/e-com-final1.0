@@ -26,7 +26,7 @@ const Hero = () => {
         >
           <BsCart2 className="mr-2" /> Start Shopping
         </button>
-        <div className="flex justify-between pt-20 ">
+        <div className="flex justify-between  pt-20 ">
             <div className="w-16 md:w-28">
             <Image width={110} height={110} src={"https://full-stack-ecommerce-clothing-web.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FFeatured1.66abddd4.png&w=128&q=75"} alt="Bazaar"/>
             </div>
@@ -41,8 +41,8 @@ const Hero = () => {
             </div> 
         </div>
       </div>
-      {/* Left Side  */}
-      <div className="hidden lg:flex flex-shrink bg-primaryWhite rounded-full  max-w-[35rem]">
+      {/* Right Side  */}
+      <div className="hidden lg:flex  shrink-0 lg:h-[30rem] lg:w-[30rem] xl:h-[35rem] xl:w-[35rem] bg-primaryWhite rounded-full bg-[#FFECE3] max-w-[35rem]">
         <Image className="-mt-5" src={heroGirlImg} alt="Image" />
       </div>
     </div>

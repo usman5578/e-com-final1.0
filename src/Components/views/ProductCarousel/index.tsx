@@ -6,10 +6,11 @@ import Card from '../Card'
 // import "slick-carousel/slick/slick-theme.css";
 // import Slider from "react-slick";
 
-const ProductCarousel: FC<{ProductData:ProductType[]}> = ({ProductData}) => {
+const ProductCarousel: FC<{ProductData:ProductType[]}> =  ({ProductData}) => {
     let initialX: number;
     let isDragging = false;
     let tabBox: any;
+
 
     const isBrowser = () => typeof window !== "undefined";
 

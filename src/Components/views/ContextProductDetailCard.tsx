@@ -3,14 +3,14 @@
 import { FC } from "react";
 import { ProductType } from "../utils/ProductDataTypes";
 import ProductDetailsCard from "./ProductDetailsCard";
-// import ContextWrapper from "@/global/context";
+import ContextWrapper from "@/global/context";
 
 const ContextProductDetailCard: FC<{ data: ProductType }> = ({ data }) => {
   return (
     <div>
-      {/* <ContextWrapper> */}
+      <ContextWrapper>
         <ProductDetailsCard data={data} />
-      {/* </ContextWrapper> */}
+      </ContextWrapper>
     </div>
   );
 };

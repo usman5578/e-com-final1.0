@@ -10,6 +10,7 @@ const Footer = () => {
    
     <div className=" flex flex-col justify-center lg:flex-row lg:justify-between space-y-10 pb-20 ">
       {/* {1St Column} */}
+      
       <div className="flex  flex-col max-w-[32rem]">
         <Image src={logo} alt="logo" />
         <p className='pt-10 pb-10'>

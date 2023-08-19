@@ -1,13 +1,14 @@
 "use client";
-import toast, { Toaster } from 'react-hot-toast';
-import React, { FC, useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { ProductType, imagesType } from "../utils/ProductDataTypes";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "../../../sanity/lib/client";
 import Image from "next/image";
 import { BsCart2 } from "react-icons/bs";
-// import { cartContext } from "@/global/context";
+import { cartContext } from "@/global/context";
 import PortableText from "react-portable-text";
+import { useCookies } from "react-cookie";
 
 const builder = imageUrlBuilder(client);
 
@@ -16,8 +17,7 @@ function urlFor(source: any) {
 }
 
 const ProductDetailsCard: FC<{ data: ProductType }> = ({ data }) => {
-  // let { state, dispatch } = useContext(0);
-  
+  let {dispatch } = useContext(cartContext);
 
   const [selectedImagePreview, setSelectedImagePreview] = useState<string>(
     data.image[0]._key
@@ -36,22 +36,50 @@ const ProductDetailsCard: FC<{ data: ProductType }> = ({ data }) => {
     }
   };
 
-  const notification = (title:string) => toast(` ${quantity} ${title} added to cart`, {
-    icon:'👏',
-  });
+  const notification = (title: string) =>
+    toast(` ${quantity} ${title} added to cart`, {
+      icon: "👏",
+    });
+
+  const [cookies, setCookies] = useCookies();
+  const [products, setProducts]= useState(cookies.products || [])
+
+ 
+
 
   function handleAddtoCart() {
     let dataToAddInCart = {
       productId: data._id,
       quantity: quantity,
     };
-    // dispatch({ payload: "addToCart", data: dataToAddInCart });
+    dispatch({ payload: "addToCart", data: dataToAddInCart });
    notification(data.productName); 
   }
 
+  
+  // function handleAddtoCart() {
+
+
+    
+  //   const newProduct = {title:data.productName, images:data.image, id:data._id, qty:quantity, price:data.price};
+  //   const updateProducts = [...products, newProduct];
+  //   setProducts(updateProducts);
+  //   setCookies('products',updateProducts)
+  //   console.log('Hello',cookies.products)
+  //   notification(data.productName);
+  // }
+  // useEffect(() => {
+  //   let cart = localStorage.getItem("cart") as string;
+  //   if (cart === null) {
+  //     localStorage.setItem("cart", JSON.stringify(state.cart));
+  //   } else {
+  //     initializerOfCart.cart = JSON.parse(cart);
+  //   }
+  // });
+
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <div className="flex flex-col lg:flex-row justify-center items-center py-16">
         {/* left  */}
         <div className="flex gap-x-4 md:gap-x-8">
@@ -134,7 +162,7 @@ const ProductDetailsCard: FC<{ data: ProductType }> = ({ data }) => {
           </div>
           <div className="flex gap-x-8 items-center">
             <button
-              onClick={() => handleAddtoCart()}
+              onClick={()=>handleAddtoCart()}
               className="flex justify-center items-center  text-white bg-gray-900 border border-gray-300 mt-2 md:mt-0  px-4 py-2"
             >
               <BsCart2 />
@@ -160,6 +188,6 @@ const ProductDetailsCard: FC<{ data: ProductType }> = ({ data }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ProductDetailsCard;

@@ -49,8 +49,11 @@ const ProductDetailsCard: FC<{ data: ProductType }> = ({ data }) => {
 
   function handleAddtoCart() {
     let dataToAddInCart = {
+      title:data.productName,
       productId: data._id,
       quantity: quantity,
+      images:data.image,
+      price:data.price
     };
     dispatch({ payload: "addToCart", data: dataToAddInCart });
    notification(data.productName); 

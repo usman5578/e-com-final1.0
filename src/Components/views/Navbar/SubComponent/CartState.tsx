@@ -1,8 +1,9 @@
 'use client'
 import { BsCart2 } from "react-icons/bs";
 import { useCookies } from "react-cookie";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { cartContext } from "@/global/context";
 
 
 
@@ -10,13 +11,12 @@ const CartState = () => {
 const [cookies] = useCookies(['products'])
 const [count, setCount] = useState(0)
 
- console.log([cookies]) 
   useEffect(()=>{
     const allProducts = cookies.products || []
-    console.log("cart Products here", allProducts)
     setCount(allProducts.length)
-  
   },[cookies])
+
+
 
   return (
     <Link href='/cart'> 

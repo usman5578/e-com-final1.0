@@ -3,17 +3,11 @@ import { cartReducer } from "../reducer";
 import { useCookies } from "react-cookie";
 
 
-
 export const cartContext = createContext<any>(null);
 
 const ContextWrapper = ({ children }: { children: ReactNode }) => {
   const initializerOfCart = {
-    cart: [
-      {
-        productId: "",
-        quantity: 2,
-      },
-    ],
+    cart: []
   };
 
   const [state, dispatch] = useReducer(cartReducer, initializerOfCart);

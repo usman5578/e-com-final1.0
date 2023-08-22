@@ -3,7 +3,9 @@ import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import { NavbarArray, NavbarItemType,
+import {
+  NavbarArray,
+  NavbarItemType,
 } from "@/Components/utils/NavbarArrayandTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,11 +13,11 @@ import CartState from "./SubComponent/CartState";
 import { BsCart2 } from "react-icons/bs";
 
 
-
 const Navbar = () => {
   const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
   return (
     // Main Div
+
     <div>
       <div className="py-6 flex  justify-between items-center space-x-12 relative">
         {/* Logo  */}

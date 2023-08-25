@@ -9,14 +9,21 @@ import { client } from "../../../../../sanity/lib/client";
 
 const builder = imageUrlBuilder(client);
 
+
 function urlFor(source: any) {
   return builder.image(source);
 }
 const CartComponent = () => {
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [cookies, setCookies, removeCookie] = useCookies(["products"]);
   const [count, setCount] = useState(0);
-  const products = cookies.products;
-  console.log("Cart Page", products);
+  // const products = cookies.products;
+  // console.log("Cart Page", products);
+  const [products, setProducts] = useState(cookies.products || []);
+  useEffect(() => {
+    const allProducts = cookies.products || [];
+    setCount(allProducts.length);
+  }, [cookies]);
+
 
   const handleCheckout = async () => {
     const stripe = await getStripePromise();
@@ -32,17 +39,20 @@ const CartComponent = () => {
       stripe?.redirectToCheckout({ sessionId: data.session.id });
     }
   };
-  const handleDeleteProduct = (index: any) => {
-    setTimeout(() => {
-      removeCookie('products')
-    }, 3000);
+  const handleDeleteProduct = (productId:any) => {
+    console.log(productId);
+    console.log(products.productId)
+    const updatedProducts = products.filter(
+      (products:any) => products.productId !== productId
+    );
+    setCookies('products', updatedProducts);
+    // removeCookie("products");
+    console.log("After remove");
   };
-
-  useEffect(() => {
-    const allProducts = cookies.products || [];
-    setCount(allProducts.length);
-  }, [cookies]);
-
+  const calculateTotalPrice = () => {
+    const totalPrice = products.reduce((total:any, product:any) => total + product.price, 0);
+    return totalPrice;
+  };
   return (
     <div className="py-10 ">
       {/* div No 1  */}
@@ -54,9 +64,9 @@ const CartComponent = () => {
 
       <div className="flex flex-col lg:flex-row justify-around items-start  ">
         <div>
-          {products?.map((items: any, index: number) => {
+          {products?.map((items: any, index:number) => {
             return (
-              <div key={index}>
+              <div key={products[index].productId}>
                 <div className="flex flex-col md:flex-row items-center py-10 space-y-5 max-w-[50rem] lg:space-x-32  md:space-x-5">
                   <div className="w-52 lg:w-80  ">
                     <Image
@@ -75,9 +85,11 @@ const CartComponent = () => {
                       <div className="text-md md:text-2xl text-gray-700 ">
                         {items.title}
                       </div>
-                      <RiDeleteBin6Line
-                      // onClick={() => handleDeleteProduct(index)}
-                      />
+                      <button>
+                        <RiDeleteBin6Line
+                          onClick={() => handleDeleteProduct(products[index].productId)}
+                        />
+                      </button>
                     </div>
                     <div className="text-gray-400 font-medium">
                       {items.title}
@@ -86,23 +98,12 @@ const CartComponent = () => {
                     <div className="text-orange-400 font-semibold text-md md:text-xl">
                       5 working Days
                     </div>
-                    <div className=" flex font-semibold text-lg"></div>$
+                    <div className=" flex  font-semibold text-lg"></div>$
                     {items.price}
-                    <div className=" flex -mt-10 font-semibold text-lg justify-end">
+                    <div className=" flex flex-grow w-20 -mt-10 text-lg justify-between">
                       <div className="flex gap-2 items-center">
-                        <div
-                          // onClick={decrementQuantity}
-                          className="select-none cursor-pointer flex justify-center items-center w-9 h-9 rounded-full bg-gray-200"
-                        >
-                          -
-                        </div>
-                        <div>{items.quantity}</div>
-                        <div
-                          // onClick={incrementQuanity}
-                          className="select-none cursor-pointer flex justify-center items-center w-9 h-9 rounded-full border border-black"
-                        >
-                          +
-                        </div>
+                        <div>Quantity:</div>
+                        <div className="font-semibold ">{items.quantity}</div>
                       </div>
                     </div>
                   </div>
@@ -119,11 +120,10 @@ const CartComponent = () => {
           </div>
           <div className="flex justify-between items-center">
             <div className="text-lg font-light">Subtotal:</div>
-            <div>$550</div>
+            <div>Total Price: ${calculateTotalPrice()}</div>
           </div>
           <button
-            onClick={handleCheckout}
-            
+            onClick={() => handleCheckout()}
             className="text-white bg-gray-900  mt-2 md:mt-0 w-full px-4 py-2"
           >
             Proceed to Checkout
@@ -133,5 +133,7 @@ const CartComponent = () => {
     </div>
   );
 };
+
+
 
 export default CartComponent;

@@ -1,4 +1,3 @@
-
 export interface slugType {
     _type: string,
     current: string,

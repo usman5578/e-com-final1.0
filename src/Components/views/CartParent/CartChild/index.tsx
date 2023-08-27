@@ -2,10 +2,12 @@
 import getStripePromise from "@/lib/stripe";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { AiTwotoneDelete } from "react-icons/ai";
 import { useCookies } from "react-cookie";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "../../../../../sanity/lib/client";
+import { useRouter } from 'next/router';
+
 
 const builder = imageUrlBuilder(client);
 
@@ -48,11 +50,17 @@ const CartComponent = () => {
     setCookies('products', updatedProducts);
     // removeCookie("products");
     console.log("After remove");
+    const router = useRouter();
+  const reloadPage = () => {
+    router.reload();
+  };
+  reloadPage()
   };
   const calculateTotalPrice = () => {
     const totalPrice = products.reduce((total:any, product:any) => total + product.price, 0);
     return totalPrice;
   };
+  
   return (
     <div className="py-10 ">
       {/* div No 1  */}
@@ -86,8 +94,11 @@ const CartComponent = () => {
                         {items.title}
                       </div>
                       <button>
-                        <RiDeleteBin6Line
-                          onClick={() => handleDeleteProduct(products[index].productId)}
+                        <AiTwotoneDelete
+                          onClick={() => {
+                            handleDeleteProduct(products[index].productId)
+                          
+                          }}
                         />
                       </button>
                     </div>

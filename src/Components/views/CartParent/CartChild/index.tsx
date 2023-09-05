@@ -6,7 +6,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { useCookies } from "react-cookie";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "../../../../../sanity/lib/client";
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 
 const builder = imageUrlBuilder(client);
@@ -49,12 +49,6 @@ const CartComponent = () => {
     );
     setCookies('products', updatedProducts);
     // removeCookie("products");
-    console.log("After remove");
-    const router = useRouter();
-  const reloadPage = () => {
-    router.reload();
-  };
-  reloadPage()
   };
   const calculateTotalPrice = () => {
     const totalPrice = products.reduce((total:any, product:any) => total + product.price, 0);
